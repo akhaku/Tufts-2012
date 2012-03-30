@@ -116,6 +116,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'south',
+    'gunicorn',
     'where',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
