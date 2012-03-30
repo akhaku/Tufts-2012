@@ -1,10 +1,14 @@
 from django.conf.urls.defaults import patterns, include, url
+from settings import MEDIA_ROOT
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+        url(r'^$', 'where.views.home'),
+        url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
+            {'document_root': MEDIA_ROOT}),
     # Examples:
     # url(r'^$', 'tufts2012.views.home', name='home'),
     # url(r'^tufts2012/', include('tufts2012.foo.urls')),

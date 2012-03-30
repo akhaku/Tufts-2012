@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tufts 2012</title>
+        <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/style.css"/>
+        {% block extrastyle %}
+        {{ extrastyle }}
+        {% endblock extrastyle %}
+    </head>
+    <body>
+        <h1>Test</h1>
+        {% block body %}
+        {{ body }}
+        {% endblock body %}
+        {% block extrascript %}
+        {{ extrascript }}
+        {% endblock extrascript %}
+    </body>
+</html>

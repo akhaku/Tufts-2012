@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block body %}
+<div id="gmap"></div>
+{% endblock body %}
+{% block extrascript %}
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}js/magic.js">
+</script>
+<script type="text/javascript">
+    initialize();
+</script>
+{% endblock %}
