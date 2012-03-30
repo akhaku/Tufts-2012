@@ -1,0 +1,5 @@
+venv
+*.pyc
+NOTES
+tufts2012/settingslocal.py
+*.swp
