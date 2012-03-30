@@ -8,6 +8,14 @@
 <script type="text/javascript" src="{{MEDIA_URL}}js/magic.js">
 </script>
 <script type="text/javascript">
-    initialize();
+    $(function() {
+        var map = initialize();
+        $.getJSON('{% url where.views.locations_json %}',{}, function(data) {
+            $.each(data['markers'], function(i, person) {
+                placeMarker(person['lat'], person['lon'], person['name'],
+                            person['place'], map);
+            });
+        });
+    });
 </script>
 {% endblock %}
