@@ -1,0 +1,4 @@
+# Tufts 2012 visualization #
+Author: akhaku (Ammar Khaku)
+
+This is an independent project I'm working. The current goal is to display a visualization of the dispersal of the Tufts class of 2012, with potentially other functional features. 
