@@ -3,3 +3,4 @@ venv
 NOTES
 tufts2012/settingslocal.py
 *.swp
+tufts2012/static/admin

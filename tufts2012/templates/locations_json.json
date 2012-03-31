@@ -1,7 +1,7 @@
 { "markers": [
 {% for location in locations %}
-{"lat": "{{ location.lat }}",
-"lon": "{{ location.lon|escapejs }}",
-"name": "{{ location.user.get_full_name|escapejs }}",
-"place": "{{ location.place|escapejs }}"}{% if not forloop.last %},{% endif %}
+{"lat": "{{ location.lat|escape }}",
+"lon": "{{ location.lon|escape }}",
+"name": "{{ location.user.get_full_name|escape }}",
+"place": "{{ location.name|escapejs }}"}{% if not forloop.last %},{% endif %}
 {% endfor %}]}
