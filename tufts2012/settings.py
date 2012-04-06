@@ -147,6 +147,8 @@ LOGGING = {
     }
 }
 
+GEOCODING_URL = "http://maps.googleapis.com/maps/api/geocode/json"
+
 try:
     from settingslocal import *
 except ImportError:

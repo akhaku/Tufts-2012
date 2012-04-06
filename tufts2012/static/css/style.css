@@ -2,9 +2,18 @@ html, body {
     height: 100%;
 }
 
+ul.messages li.error { background-color: #B40404; }
+ul.messages li.success { background-color: #21610B; }
+ul.messages li.info { background-color: #071019; }
+
+ul.errorlist { list-style-type: none; margin: 0px 0px 20px 0px; padding: 0px; }
+ul.errorlist li { float: left; font-size: 12px; color: #8A0808; }
+
 div#gmap {
     min-width: 800px;
-    width: 100%;
+    width: 80%;
     height: 400px;
     border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
 }

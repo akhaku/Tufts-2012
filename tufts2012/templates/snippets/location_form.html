@@ -1,0 +1,21 @@
+<form id="location-form">
+{% if form.non_field_errors %}
+<ul class="errorlist">{{ form.non_field_errors.as_ul }}</ul>
+{% endif %}
+{% csrf_token %}
+{{ form.first_name }}
+{{ form.first_name.errors }}
+{{ form.last_name }}
+{{ form.last_name.errors }}
+{{ form.name }}
+{{ form.name.errors }}
+<input type="submit" value="Submit" id="where-submit" />
+</form>
+{% if added %}
+<div id="added-div">
+    <span id="added-name">{{ name }}</span>
+    <span id="added-loc">{{ location }}</span>
+    <span id="added-lat">{{ lat }}</span>
+    <span id="added-lon">{{ lon }}</span>
+</div>
+{% endif %}

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
+<div id="add-location-div"></div>
 <div id="gmap"></div>
 {% endblock body %}
 {% block extrascript %}
@@ -10,6 +11,10 @@
 <script type="text/javascript">
     $(function() {
         var map = initialize();
+        $('#add-location-div').load('{% url where.views.location_form %}',
+            function() {
+                locationFormListeners('{% url where.views.add_location %}', map);
+            });
         $.getJSON('{% url where.views.locations_json %}',{}, function(data) {
             $.each(data['markers'], function(i, person) {
                 placeMarker(person['lat'], person['lon'], person['name'],

@@ -6,5 +6,6 @@ class Location(models.Model):
     """
     lat = models.DecimalField(max_digits=6, decimal_places=3)
     lon = models.DecimalField(max_digits=6, decimal_places=3)
-    name = models.CharField(max_length=50) # The english name for the location
+     # The english name for the location
+    name = models.CharField(max_length=50, help_text="Location")
     user = models.ForeignKey(User, related_name="location")
