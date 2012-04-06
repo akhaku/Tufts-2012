@@ -1,11 +1,19 @@
+var pLine;
+var polygonMode;
+var plineOptions = {strokeColor:"#0B0B61",strokeOpacity:0.7};
+var pgonOptions = $.extend(plineOptions,{fillColor:"#0B0B61",fillOpacity:0.4});
+
 function initialize() {
-    var myOptions = {
+    polygonMode = false;
+    var mapOptions = {
         center: new google.maps.LatLng(42.406, -71.119),
         zoom: 3,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     var map = new google.maps.Map(document.getElementById("gmap"),
-            myOptions);
+            mapOptions);
+    pline = new google.maps.Polyline(plineOptions);
+    pline.setMap(map);
     return map;
 }
 
@@ -31,5 +39,28 @@ function locationFormListeners(post_url, map) {
                 $("#added-div").remove();
                 locationFormListeners(post_url, map);
             });
+    });
+}
+
+function polygonListeners(get_url, map) {
+    google.maps.event.addListener(map, 'click', function(e) {
+        var path = pline.getPath();
+        path.push(e.latLng);
+        if(!polygonMode) {
+            var marker = new google.maps.Marker({position: e.latLng,
+                map:map, title: "", icon: "static/img/pin.gif"});
+            marker.setMap(map);
+            polygonMode = true;
+            google.maps.event.addListener(marker, 'click', function(ev) {
+                if(pline.getPath()['b'].length > 2) {
+                    var pgon = new google.maps.Polygon(
+                        $.extend({paths: pline.getPath()}, pgonOptions));
+                    pgon.setMap(map);
+                    polygonMode = false;
+                    pline = new google.maps.Polyline(plineOptions);
+                    pline.setMap(map);
+                }
+            });
+        }
     });
 }

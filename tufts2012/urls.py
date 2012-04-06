@@ -10,6 +10,7 @@ urlpatterns = patterns('',
         url(r'^json/$', 'where.views.locations_json'),
         url(r'^where/new/$', 'where.views.location_form'),
         url(r'^where/create/$', 'where.views.add_location'),
+        url(r'^where/area/$', 'where.views.find_area'),
         url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': MEDIA_ROOT}),
     # Examples:

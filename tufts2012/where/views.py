@@ -55,3 +55,8 @@ def add_location(request):
                 'name' :name, 'location' :address},
             context_instance=RequestContext(request))
 
+def find_area(request):
+    # stub view
+    return render_to_response('snippets/location_form.html', {},
+            context_instance=RequestContext(request))
+
