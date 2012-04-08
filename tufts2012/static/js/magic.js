@@ -43,7 +43,11 @@ function locationFormListeners(post_url, map) {
 }
 
 function addPolygonMember(person) {
-    $('#polygon-results-div').append("<li>"+person['name']+" - "+person['loc']);
+    var res = $('#polygon-results-div');
+    if ($('#poly-'+person['id'], res).get(0)) {
+        res.append("<li id=poly'"+person['id']+"'>"+
+                person['name']+" - "+person['loc']);
+    }
 }
 
 function polygonListeners(get_url, map) {

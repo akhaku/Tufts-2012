@@ -70,7 +70,7 @@ def find_area(request, coords):
             lat = float(loc.lat)
             lon = float(loc.lon)
             if in_polygon(lat, lon, polygon_coords):
-                selected_users.append(dict(name=user.get_full_name(),
+                selected_users.append(dict(name=user.get_full_name(), id=user.id,
                                            loc=loc.name, lat=lat, lon=lon))
         except Location.DoesNotExist:
             logging.error("ERROR1: User %s has no locations" % user)
