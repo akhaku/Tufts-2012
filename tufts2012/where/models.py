@@ -9,3 +9,6 @@ class Location(models.Model):
      # The english name for the location
     name = models.CharField(max_length=50, help_text="Location")
     user = models.ForeignKey(User, related_name="location")
+
+    def __unicode__(self):
+        return self.name

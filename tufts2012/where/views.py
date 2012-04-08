@@ -1,13 +1,15 @@
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 import json
-from urllib import quote
+from urllib import quote, unquote
 from urllib2 import urlopen
 from where.forms import LocationForm
 from where.models import Location
+from util import in_polygon
 import logging
 
 def home(request):
@@ -55,8 +57,24 @@ def add_location(request):
                 'name' :name, 'location' :address},
             context_instance=RequestContext(request))
 
-def find_area(request):
+def find_area(request, coords):
     # stub view
-    return render_to_response('snippets/location_form.html', {},
-            context_instance=RequestContext(request))
+    coords = coords.split(",,")
+    users = User.objects.all().select_related('location')
+    polygon_coords = [coord.split(',') for coord in coords]
+    polygon_coords = map(lambda x: [float(x[0]), float(x[1])], polygon_coords)
+    selected_users = []
+    for user in users:
+        try:
+            loc = user.location.get()
+            lat = float(loc.lat)
+            lon = float(loc.lon)
+            if in_polygon(lat, lon, polygon_coords):
+                selected_users.append(dict(name=user.get_full_name(),
+                                           loc=loc.name, lat=lat, lon=lon))
+        except Location.DoesNotExist:
+            logging.error("ERROR1: User %s has no locations" % user)
+        except Location.MultipleObjectsReturned:
+            logging.error("ERROR2: User %s has multiple locations" % user)
+    return HttpResponse(json.dumps(selected_users))
 

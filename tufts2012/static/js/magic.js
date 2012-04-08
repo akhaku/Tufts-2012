@@ -42,6 +42,10 @@ function locationFormListeners(post_url, map) {
     });
 }
 
+function addPolygonMember(person) {
+    $('#polygon-results-div').append("<li>"+person['name']+" - "+person['loc']);
+}
+
 function polygonListeners(get_url, map) {
     google.maps.event.addListener(map, 'click', function(e) {
         var path = pline.getPath();
@@ -53,12 +57,23 @@ function polygonListeners(get_url, map) {
             polygonMode = true;
             google.maps.event.addListener(marker, 'click', function(ev) {
                 if(pline.getPath()['b'].length > 2) {
+                    var paths = pline.getPath();
                     var pgon = new google.maps.Polygon(
-                        $.extend({paths: pline.getPath()}, pgonOptions));
+                        $.extend({paths: paths}, pgonOptions));
                     pgon.setMap(map);
                     polygonMode = false;
                     pline = new google.maps.Polyline(plineOptions);
                     pline.setMap(map);
+                    var params = ""
+                    $.each(paths['b'], function (i, v) {
+                        params += v.lat() + "," + v.lng() + ",,";
+                    });
+                    params = params.substring(0, params.length-2) + '/';
+                    $.getJSON(get_url+params, {}, function(data) {
+                        $.each(data, function(i, person) {
+                            addPolygonMember(person);
+                        });
+                    });
                 }
             });
         }
