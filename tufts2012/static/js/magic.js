@@ -44,8 +44,8 @@ function locationFormListeners(post_url, map) {
 
 function addPolygonMember(person) {
     var res = $('#polygon-results-div');
-    if ($('#poly-'+person['id'], res).get(0)) {
-        res.append("<li id=poly'"+person['id']+"'>"+
+    if (!$('#poly-'+person['id'], res).get(0)) {
+        res.append("<li id='poly-"+person['id']+"'>"+
                 person['name']+" - "+person['loc']);
     }
 }
@@ -65,6 +65,7 @@ function polygonListeners(get_url, map) {
                     var pgon = new google.maps.Polygon(
                         $.extend({paths: paths}, pgonOptions));
                     pgon.setMap(map);
+                    marker.setMap(null);
                     polygonMode = false;
                     pline = new google.maps.Polyline(plineOptions);
                     pline.setMap(map);
