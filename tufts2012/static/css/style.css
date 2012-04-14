@@ -37,6 +37,7 @@ div#gmap {
 #search-box {
     font-size: 20px;
     padding: 7px;
+    margin: 7px;
     border-radius: 7px;
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;
@@ -49,4 +50,39 @@ div#search-div {
 
 div.clearfix {
     clear: both;
+}
+
+div#search-expl {
+    margin: 5px;
+    font-size: 15px;
+    color: #3B240B;
+}
+
+ul.add-form {
+    background-color: #FAAC58;
+    padding: 5px;
+    border-radius: 0px 0px 10px 10px;
+    -webkit-border-radius: 0px 0px 10px 10px;
+    -moz-border-radius: 0px 0px 10px 10px;
+}
+ul.add-form li {
+    list-style-type: none;
+}
+ul.add-form li input {
+    background-color: #61210B;
+    font-size: 20px;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    padding: 5px;
+    color: #F2F2F2;
+}
+div#add-loc-but {
+    border: 1px solid black;
+    background-color: #F6E3CE;
+    position: relative;
+    top: 20px;
+    margin: 0px;
+    padding: 5px;
+    font-size: 25px;
 }

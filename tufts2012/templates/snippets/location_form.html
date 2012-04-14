@@ -1,15 +1,26 @@
 <form id="location-form">
+<ul class="add-form">
 {% if form.non_field_errors %}
+<li>
 <ul class="errorlist">{{ form.non_field_errors.as_ul }}</ul>
+</li>
 {% endif %}
 {% csrf_token %}
+<li>
 {{ form.first_name }}
 {{ form.first_name.errors }}
+</li>
+<li>
 {{ form.last_name }}
 {{ form.last_name.errors }}
+</li>
+<li>
 {{ form.name }}
 {{ form.name.errors }}
+</li>
+<li>
 <input type="submit" value="Submit" id="where-submit" />
+</li>
 </form>
 {% if added %}
 <div id="added-div">
