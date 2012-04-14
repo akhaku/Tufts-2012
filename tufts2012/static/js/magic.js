@@ -1,10 +1,12 @@
 var pLine;
 var polygonMode;
+var infowin;
 var plineOptions = {strokeColor:"#0B0B61",strokeOpacity:0.7};
 var pgonOptions = $.extend(plineOptions,{fillColor:"#0B0B61",fillOpacity:0.4});
 
 function initialize() {
     polygonMode = false;
+    infowin = new google.maps.InfoWindow();
     var mapOptions = {
         center: new google.maps.LatLng(42.406, -71.119),
         zoom: 3,
@@ -23,6 +25,10 @@ function placeMarker(lat, lon, name, place, map) {
                                          map:map,
                                          title: name+ " - " + place});
     marker.setMap(map);
+    google.maps.event.addListener(marker, 'click', function(r) {
+        infowin.content = name + " - " + place;
+        infowin.open(map, marker);
+    });
 }
 
 function locationFormListeners(post_url, map) {
@@ -81,6 +87,27 @@ function polygonListeners(get_url, map) {
                     });
                 }
             });
+        }
+    });
+}
+
+function autocompleteInit(get_url, map) {
+    $('#search-box').autocomplete({
+        source: get_url,
+        minLength: 3,
+        focus: function(e, v) {
+            $('#search-box').val(v.item.label);
+            return false;
+        },
+        select: function(e,i) {
+            var latlng = new google.maps.LatLng(i.item.lat, i.item.lon);
+            map.panTo(latlng);
+            map.setZoom(5);
+            infowin.close();
+            infowin.content = i.item['label'] + " - " + i.item['name'];
+            infowin.setPosition(latlng);
+            infowin.open(map);
+            return false;
         }
     });
 }

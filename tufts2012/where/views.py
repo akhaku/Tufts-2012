@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -10,6 +11,7 @@ from urllib2 import urlopen
 from where.forms import LocationForm
 from where.models import Location
 from util import in_polygon
+from random import random
 import logging
 
 def home(request):
@@ -43,8 +45,8 @@ def add_location(request):
         user = User.objects.create(first_name=fname, last_name=lname, username=uname)
     try:
         location = user.location.get()
-        location.lat = lat
-        location.lon = lon
+        location.lat = lat * 1.2 * random()
+        location.lon = lon * 1.2 * random()
         location.user = user
         location.name = address
         location.save()
@@ -78,3 +80,14 @@ def find_area(request, coords):
             logging.error("ERROR2: User %s has multiple locations" % user)
     return HttpResponse(json.dumps(selected_users))
 
+def search_ajax(request):
+    term = request.REQUEST.get('term')
+    locations = Location.objects.filter(Q(user__first_name__icontains=term) \
+            | Q(user__last_name__icontains=term)).select_related('user')
+    matches = []
+    for loc in locations:
+        label = loc.user.get_full_name()
+        value = loc.user.id
+        matches.append(dict(label=label, value=value, lat=float(loc.lat),
+            lon=float(loc.lon), name=loc.name))
+    return HttpResponse(json.dumps(matches))

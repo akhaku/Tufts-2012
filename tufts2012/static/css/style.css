@@ -17,3 +17,11 @@ div#gmap {
     margin-left: auto;
     margin-right: auto;
 }
+
+#search-box {
+    font-size: 20px;
+    padding: 7px;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+}

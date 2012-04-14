@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block body %}
 <div id="add-location-div"></div>
+<input type="text" id="search-box" />
 <div id="gmap"></div>
 <div id="polygon-results-div">
     <ul id="polygon-results"></ul>
@@ -25,6 +26,7 @@
             });
         });
         polygonListeners('{% url where.views.find_area %}', map);
+        autocompleteInit('{% url where.views.search_ajax %}', map);
     });
 </script>
 {% endblock %}

@@ -3,6 +3,7 @@
     <head>
         <title>Tufts 2012</title>
         <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/ui-lightness/jquery-ui-1.8.18.css" />
         {% block extrastyle %}
         {{ extrastyle }}
         {% endblock extrastyle %}
@@ -23,6 +24,8 @@
         {% endblock body %}
         <a href="http://akhaku.com">akhaku.com</a>
         <script type="text/javascript" src="{{MEDIA_URL}}js/jquery-1.7.2.min.js">
+        </script>
+        <script type="text/javascript" src="{{MEDIA_URL}}js/jquery-ui-1.8.18.min.js">
         </script>
         {% block extrascript %}
         {{ extrascript }}
