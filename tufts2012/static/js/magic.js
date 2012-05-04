@@ -56,6 +56,7 @@ function polygonButtonListeners() {
         polyResults = false;
         resizeGmap();
         polygonMode = false;
+        destroySlimscroll();
         for(var i=0; i<polygonArray.length; i++)
             polygonArray[i].setMap(null);
         $('#polygon-results').empty();
@@ -122,12 +123,20 @@ function polygonListeners(get_url, map) {
                                 resizeGmap();
                             }
                             addPolygonMember(person);
+                            slimScrollSetup();
                         });
                     });
                 }
             });
         }
     });
+}
+function destroySlimscroll() {
+    $("#polygon-results").parent().replaceWith($("#polygon-results"));
+    $("#polygon-results").css("height","auto");
+}
+function slimScrollSetup() {
+    $("#polygon-results").slimScroll({height:"350px"});
 }
 
 function resizeGmap() {

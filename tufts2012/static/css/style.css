@@ -65,12 +65,16 @@ div#gmap {
     height: 350px;
     width: 100%;
 }
-
+#polygon-results {
+    max-height: 350px;
+    overflow: hidden;
+    padding: 0px;
+    font-size: 12px;
+}
 div#polygon-results-div {
+    max-height: 350px;
     float: left;
     width: 180px;
-    overflow-x: hidden
-    overflow-y: scroll;
 }
 #polygon-results li {
     list-style-type: none;
@@ -126,9 +130,6 @@ div#expl-div {
     margin-bottom: 20px;
 }
 
-div#polygon-tools {
-
-}
 div.polygon-but {
     color: #3B240B;
     border-radius: 0px 0px 7px 7px;
