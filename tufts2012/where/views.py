@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.utils.html import escape
 import json
 from urllib import quote, unquote
 from urllib2 import urlopen
@@ -63,7 +64,6 @@ def add_location(request):
             context_instance=RequestContext(request))
 
 def find_area(request, coords):
-    # stub view
     coords = coords.split(",,")
     users = User.objects.all().select_related('location')
     polygon_coords = [coord.split(',') for coord in coords]
@@ -75,8 +75,8 @@ def find_area(request, coords):
             lat = float(loc.lat)
             lon = float(loc.lon)
             if in_polygon(lat, lon, polygon_coords):
-                selected_users.append(dict(name=user.get_full_name(), id=user.id,
-                                           loc=loc.name, lat=lat, lon=lon))
+                selected_users.append(dict(name=escape(user.get_full_name()), id=user.id,
+                                           loc=escape(loc.name), lat=lat, lon=lon))
         except Location.DoesNotExist:
             logging.error("ERROR1: User %s has no locations" % user)
         except Location.MultipleObjectsReturned:

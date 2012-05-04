@@ -117,6 +117,7 @@ div#polygon-tools {
 
 }
 div.polygon-but {
+    color: #3B240B;
     border-radius: 0px 0px 7px 7px;
     padding: 5px;
     float: left;
@@ -135,6 +136,7 @@ div.polygon-but {
     -moz-webkit-box-shadow: 3px 3px 5px #888;
 }
 .polygon-but.depressed {
+    color: #2E2E2E;
     border: 2px inset #3A2F0B;
     position: relative;
     border-top: none;
