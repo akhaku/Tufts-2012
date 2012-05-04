@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 {% block body %}
-<input type="text" id="search-box" placeholder="Search"/>
+<div id="search-div">
+    <input type="text" id="search-box" placeholder="Search"/>
+    <div id="search-expl">Search in the box above to see where that guy is going to be after graduation!</div>
 </div>
 <div id="gmap"></div>
-<div id="search-div">
-<div id="search-expl">Search in the box above to see where that guy is going to be after graduation!</div>
-<div id="add-loc-but">Add yourself</div>
-<div id="add-location-div"></div>
-<div id="polygon-results-div">
-    <ul id="polygon-results"></ul>
+    <div id="polygon-results-div">
+        <ul id="polygon-results"></ul>
+    </div>
+</div>
+<div id="add-loc-but">
+    <div id="add-location-div"></div>
 </div>
 {% endblock body %}
 {% block extrascript %}
@@ -18,19 +20,19 @@
 </script>
 <script type="text/javascript">
     $(function() {
-        var map = initialize();
-        $('#add-location-div').load('{% url where.views.location_form %}',
-            function() {
+            var map = initialize();
+            $('#add-location-div').load('{% url where.views.location_form %}',
+                function() {
                 locationFormListeners('{% url where.views.add_location %}', map);
+                });
+            $.getJSON('{% url where.views.locations_json %}',{}, function(data) {
+                $.each(data['markers'], function(i, person) {
+                    placeMarker(person['lat'], person['lon'], person['name'],
+                        person['place'], map);
+                    });
+                });
+            polygonListeners('{% url where.views.find_area %}', map);
+            autocompleteInit('{% url where.views.search_ajax %}', map);
             });
-        $.getJSON('{% url where.views.locations_json %}',{}, function(data) {
-            $.each(data['markers'], function(i, person) {
-                placeMarker(person['lat'], person['lon'], person['name'],
-                            person['place'], map);
-            });
-        });
-        polygonListeners('{% url where.views.find_area %}', map);
-        autocompleteInit('{% url where.views.search_ajax %}', map);
-    });
-</script>
-{% endblock %}
+        </script>
+        {% endblock %}

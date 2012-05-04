@@ -39,14 +39,17 @@ def add_location(request):
     obj = json.loads(json_data) # TODO catch IndexError, KeyError parse error etc
     lat = obj['results'][0]['geometry']['location']['lat']
     lon = obj['results'][0]['geometry']['location']['lng']
+    # Randomize location so markers dont overlap
+    lat = lat + 0.4 * random() - 0.2 
+    lon = lon + 0.4 * random() - 0.2
     try:
         user = User.objects.get(username=uname)
     except User.DoesNotExist:
         user = User.objects.create(first_name=fname, last_name=lname, username=uname)
     try:
         location = user.location.get()
-        location.lat = lat * 1.2 * random()
-        location.lon = lon * 1.2 * random()
+        location.lat = lat
+        location.lon = lon
         location.user = user
         location.name = address
         location.save()
