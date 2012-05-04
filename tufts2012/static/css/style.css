@@ -60,10 +60,20 @@ a:hover {
 }
 
 div#gmap {
-    width: 100%;
+    max-width: 100%;
+    float: left;
     height: 350px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
+}
+
+div#polygon-results-div {
+    float: left;
+    width: 180px;
+    overflow-x: hidden
+    overflow-y: scroll;
+}
+#polygon-results li {
+    list-style-type: none;
 }
 
 #search-box {

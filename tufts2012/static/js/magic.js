@@ -1,10 +1,11 @@
-var pLine;
-var polygonArray = Array();
-var polygonMode;
-var polygonListen = false;
-var polyMarker;
-var infowin;
-var map;
+var pLine; /* The current polyline on the map. This could have an empty path */
+var polygonArray = Array(); /* The array of all the polygon objects */
+var polygonMode; /* True if you are currently drawing a polygon */
+var polygonListen = false; /* True if polygon mode is active */
+var polyMarker; /* The first marker for the polygon */
+var infowin;    /* The one infowindow allowed on the map */
+var map; /* The map object */
+var polyResults = false; /* True if results are being displayed */
 var plineOptions = {strokeColor:"#0B0B61",strokeOpacity:0.7};
 var pgonOptions = $.extend(plineOptions,{fillColor:"#0B0B61",fillOpacity:0.4});
 
@@ -23,6 +24,7 @@ function initialize() {
     $('#polygon-clear').addClass('depressed');
     polyMarker = new google.maps.Marker({ map:map,
         title: "", icon: "static/img/pin.gif"});
+    google.maps.event.addDomListener(window, 'resize', resizeGmap);
     return map;
 }
 
@@ -51,6 +53,7 @@ function polygonButtonListeners() {
     $('#polygon-clear').click(function() {
         pline.setPath([]);
         polyMarker.setMap(null);
+        polyResults = false;
         polygonMode = false;
         for(var i=0; i<polygonArray.length; i++)
             polygonArray[i].setMap(null);
@@ -113,6 +116,10 @@ function polygonListeners(get_url, map) {
                     params = params.substring(0, params.length-2) + '/';
                     $.getJSON(get_url+params, {}, function(data) {
                         $.each(data, function(i, person) {
+                            if (i==0) {
+                                polyResults = true;
+                                resizeGmap();
+                            }
                             addPolygonMember(person);
                         });
                     });
@@ -120,6 +127,17 @@ function polygonListeners(get_url, map) {
             });
         }
     });
+}
+
+function resizeGmap() {
+    /* Checks if the results div exists, and resizes the map if it does. 
+     * Triggered when polyResults are found or the window is resized.
+     */
+    if (!polyResults) return;
+    var wrapW = $("#wrapper").width();
+    var resW = 180;
+    $("#gmap").css("width",wrapW - resW);
+    google.maps.event.trigger(map, 'resize');
 }
 
 function autocompleteInit(get_url, map) {
