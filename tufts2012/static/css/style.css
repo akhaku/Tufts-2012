@@ -1,8 +1,14 @@
+@font-face {
+    font-family: ThrowBold;
+    src: url('../fonts/ThrowMyHandsUpintheAirBold.ttf');
+}
+
 html, body {
     font-family: Helvetica;
     height: 100%;
     margin: 0px;
     padding: 0px;
+    background-color: #3B240B;
 }
 
 ul.messages li.error { background-color: #B40404; }
@@ -13,26 +19,30 @@ ul.errorlist { list-style-type: none; margin: 0px 0px 20px 0px; padding: 0px; }
 ul.errorlist li { float: left; font-size: 12px; color: #8A0808; }
 
 #header {
+    font-family: ThrowBold;
     color: #3B240B;
+    border-bottom: 3px dashed black;
 }
 #header div {
     padding-top: 20px;
-    margin-left: 250px;
-    width: 600px;
+    padding-left: 20px;
     height: 60px;
     font-size: 40px;
-    letter-spacing: 2px;
+    letter-spacing: 4px;
 }
 
 div#wrapper {
-    width: 900px;
+    width: 890px;
+    background-color: white;
     margin-left: auto;
     margin-right: auto;
-    border-top: 3px dashed black;
+    padding: 10px;
+    border-left: 2px solid #190707;
+    border-right: 2px solid #190707;
 }
 
 div#gmap {
-    width: 900px;
+    width: 100%;
     height: 400px;
     margin-left: auto;
     margin-right: auto;
@@ -54,12 +64,6 @@ div#search-div {
 
 div.clearfix {
     clear: both;
-}
-
-div#search-expl {
-    margin: 5px;
-    font-size: 15px;
-    color: #3B240B;
 }
 
 ul.add-form {
@@ -91,4 +95,5 @@ div#expl-div {
     font-size: 15px;
     margin-left: 90px;;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
