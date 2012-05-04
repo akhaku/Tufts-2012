@@ -13,9 +13,7 @@ ul.errorlist { list-style-type: none; margin: 0px 0px 20px 0px; padding: 0px; }
 ul.errorlist li { float: left; font-size: 12px; color: #8A0808; }
 
 #header {
-    background-color: #D8D8D8;
-    border-bottom: 2px solid #6E6E6E;
-    color: #0A0A2A;
+    color: #3B240B;
 }
 #header div {
     padding-top: 20px;
@@ -24,6 +22,13 @@ ul.errorlist li { float: left; font-size: 12px; color: #8A0808; }
     height: 60px;
     font-size: 40px;
     letter-spacing: 2px;
+}
+
+div#wrapper {
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    border-top: 3px dashed black;
 }
 
 div#gmap {
@@ -43,9 +48,8 @@ div#gmap {
 }
 
 div#search-div {
-    width: 900px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 200px;
+    float: left;
 }
 
 div.clearfix {
@@ -69,17 +73,22 @@ ul.add-form li {
     float: left;
 }
 ul.add-form li input {
-    background-color: #61210B;
     font-size: 20px;
     border-radius: 7px;
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;
     padding: 5px;
-    color: #F2F2F2;
+    color: #3B240B;
 }
 div#add-loc-but {
-    width: 900px;
     clear: both;
-    margin-left: auto;
-    margin-right: auto;
+}
+
+div#expl-div {
+    width: 600px;
+    color: #3B240B;
+    float: left;
+    font-size: 15px;
+    margin-left: 90px;;
+    margin-top: 20px;
 }

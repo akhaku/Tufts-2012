@@ -4,10 +4,16 @@
     <input type="text" id="search-box" placeholder="Search"/>
     <div id="search-expl">Search in the box above to see where that guy is going to be after graduation!</div>
 </div>
+<div id="expl-div">
+    Use the map to see where people from the Tufts class if 2012 will be after
+    graduation. To see who is within a certain area, use the polygon tool:
+    start by clicking on the map to set your first marker. Click around to
+    make your box, then click on the first point to close the box.
+</div>
+<div class="clearfix"></div>
 <div id="gmap"></div>
-    <div id="polygon-results-div">
-        <ul id="polygon-results"></ul>
-    </div>
+<div id="polygon-results-div">
+    <ul id="polygon-results"></ul>
 </div>
 <div id="add-loc-but">
     <div id="add-location-div"></div>
@@ -34,5 +40,5 @@
             polygonListeners('{% url where.views.find_area %}', map);
             autocompleteInit('{% url where.views.search_ajax %}', map);
             });
-        </script>
-        {% endblock %}
+</script>
+{% endblock %}
