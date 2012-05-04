@@ -106,9 +106,14 @@ def find_area(request, coords):
     return HttpResponse(json.dumps(selected_users))
 
 def search_ajax(request):
-    term = request.REQUEST.get('term')
-    locations = Location.objects.filter(Q(user__first_name__icontains=term) \
-            | Q(user__last_name__icontains=term)).select_related('user')
+    term = request.REQUEST.get('term').rstrip().lstrip().split()
+    term1 = term[0]
+    try:
+        term2 = term[1]
+    except IndexError:
+        term2 = term1
+    locations = Location.objects.filter(Q(user__first_name__icontains=term1) \
+            | Q(user__last_name__icontains=term2)).select_related('user')
     matches = []
     for loc in locations:
         label = loc.user.get_full_name()
