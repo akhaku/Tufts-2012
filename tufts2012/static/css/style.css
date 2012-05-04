@@ -133,9 +133,9 @@ div#expl-div {
 
 div.polygon-but {
     color: #3B240B;
-    border-radius: 0px 0px 7px 7px;
-    -webkit-border-radius: 0px 0px 7px 7px;
-    -moz-border-radius: 0px 0px 7px 7px;
+    border-radius: 7px 7px 0px 0px;
+    -webkit-border-radius: 7px 7px 0px 0px;
+    -moz-border-radius: 7px 7px 0px 0px;
     padding: 5px;
     float: left;
     width: 120px;
@@ -143,29 +143,30 @@ div.polygon-but {
     margin-right: 5px;
     margin-left: 5px;
     border: 2px outset #3A2F0B;
-    border-top: none;
+    border-bottom: none;
     cursor: pointer;
     position: relative;
-    top: -1px;
-    left: -1px;
-    box-shadow: 3px 3px 5px #888;
-    webkit-box-shadow: 3px 3px 5px #888;
-    -moz-webkit-box-shadow: 3px 3px 5px #888;
-}
-.polygon-but.depressed {
-    color: #2E2E2E;
-    background-color: #F3E2A9;
-    border: 2px inset #3A2F0B;
-    position: relative;
-    border-top: none;
     top: 1px;
     left: 1px;
     box-shadow: 0px 0px 0px #888;
     webkit-box-shadow: 0px 0px 0px #888;
     -moz-webkit-box-shadow: 0px 0px 0px #888;
 }
-#polygon-clear.depressed {
-    background-color: #FFF;
+.polygon-but.depressed {
+    color: #2E2E2E;
+    background-color: #F3E2A9;
+    border-style: inset;
+    position: relative;
+    top: -1px;
+    left: -1px;
+    box-shadow: -3px -3px 5px #888;
+    webkit-box-shadow: -3px -3px 5px #888;
+    -moz-webkit-box-shadow: -3px -3px 5px #888;
+}
+
+#polygon-tools {
+    float: right;
+    margin-right: 10px;
 }
 
 h2 {

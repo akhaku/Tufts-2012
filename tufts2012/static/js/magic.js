@@ -21,7 +21,6 @@ function initialize() {
             mapOptions);
     pline = new google.maps.Polyline(plineOptions);
     pline.setMap(map);
-    $('#polygon-clear').addClass('depressed');
     polyMarker = new google.maps.Marker({ map:map,
         title: "", icon: "static/img/pin.gif"});
     google.maps.event.addDomListener(window, 'resize', resizeGmap);
@@ -79,7 +78,7 @@ function polygonModeOff() {
         for(var i=0; i<polygonArray.length; i++)
             polygonArray[i].setMap(null);
         $('#polygon-results').empty();
-        $('#polygon-clear').addClass('depressed');
+        $('#polygon-clear').removeClass('depressed');
         polygonModeToggle();
 }
 
@@ -113,7 +112,7 @@ function polygonListeners(get_url, map) {
         if (polygonListen == false)
             return 
         if ($('#polygon-clear').hasClass('depressed'))
-            $('#polygon-clear').removeClass('depressed');
+            $('#polygon-clear').addClass('depressed');
         var path = pline.getPath();
         path.push(e.latLng);
         if(!polygonMode) {
@@ -151,7 +150,7 @@ function polygonListeners(get_url, map) {
     });
 }
 function destroySlimscroll() {
-    $("#polygon-results").parent().replaceWith($("#polygon-results"));
+    $(".slimScrollDiv").replaceWith($("#polygon-results"));
     $("#polygon-results").css("height","auto");
 }
 function slimScrollSetup() {
@@ -166,7 +165,6 @@ function resizeGmap() {
     if (!polyResults) resW=0;
     var wrapW = $("#wrapper").width();
     $("#gmap").css("width",wrapW - resW);
-    $("#polygon-tools").css("margin-left", resW);
     google.maps.event.trigger(map, 'resize');
 }
 
