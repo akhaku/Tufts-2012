@@ -23,6 +23,17 @@ def about(request):
     return render_to_response('about.html', {},
             context_instance=RequestContext(request))
 
+def search_loc_ajax(request):
+    address=request.REQUEST.get("location");
+    if address is None or len(address) == 0: return HttpResponse({})
+    address = address.rstrip().lstrip()
+    geocode_url = "%s?address=%s&sensor=false" % (settings.GEOCODING_URL, quote(address))
+    json_data = str(urlopen(geocode_url).read())
+    obj = json.loads(json_data) # TODO catch IndexError, KeyError parse error etc
+    lat = obj['results'][0]['geometry']['location']['lat']
+    lon = obj['results'][0]['geometry']['location']['lng']
+    return HttpResponse(json.dumps(dict(lat=float(lat),lon=float(lon))))
+
 def locations_json(request):
     locations = Location.objects.all().select_related('user');
     return render_to_response('locations_json.json',{'locations': locations},
@@ -35,6 +46,11 @@ def location_form(request):
             context_instance=RequestContext(request))
 
 def add_location(request):
+    form = LocationForm(data=request.POST)
+    if not form.is_valid():
+        return render_to_response('snippets/location_form.html',
+                {'form': form, 'added': False},
+                context_instance=RequestContext(request))
     address = request.REQUEST.get('name')
     fname = request.REQUEST.get('first_name').title()
     lname = request.REQUEST.get('last_name').title()

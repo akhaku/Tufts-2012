@@ -3,13 +3,22 @@
 <div id="search-div">
     <br/>
     <input type="text" id="search-box" placeholder="Search name"/>
+    <p style="padding:0px;margin:0px;text-align:center">Or</p>
+    <form action="" method="get" id="search-loc-form">
+        <input type="text" id="search-location" placeholder="Search location"/>
+        <input type="submit" name="location" id="search-loc-but" value="Search"/>
+    </form>
 </div>
 <div id="expl-div">
     Use the map to see where people from the Tufts class if 2012 will be after
-    graduation. To see who is within a certain area, use the polygon tool:
-    click the polygon tool below then start by clicking on the map to set your
-    first marker. Click around to make your box, then click on the first point
-    to close the box. <a href="{% url where.views.about %}">More info?</a>
+    graduation. To see people within a certain area, use the <span class="bold">
+        polygon tool</span>:
+    <ol>
+        <li>Click 'Activate Polygon' below to activate the tool</li>
+        <li>Click on the map to set the first corner of the polygon.</li>
+        <li>Specify the other corners of your polygon by clicking on the map in order.</li>
+        <li>Click back on the first corner to close the polygon.</li>
+    </ol><a href="{% url where.views.about %}">More info?</a>
 </div>
 <div class="clearfix"></div>
 <div id="polygon-results-div">
@@ -20,7 +29,11 @@
     <div id="polygon-on" class="polygon-but">Activate Polygon</div>
     <div id="polygon-clear" class="polygon-but depressed">Clear Polygons</div>
 </div>
+<div class="clearfix"></div>
+<br/>
+<br/>
 <div id="add-loc-but">
+    <h2>Add someone</h2>
     <div id="add-location-div"></div>
 </div>
 {% endblock body %}
@@ -45,6 +58,7 @@
                 });
             polygonListeners('{% url where.views.find_area %}', map);
             autocompleteInit('{% url where.views.search_ajax %}', map);
+            searchLocationListener('{% url where.views.search_loc_ajax %}', map);
             polygonButtonListeners();
             });
 </script>

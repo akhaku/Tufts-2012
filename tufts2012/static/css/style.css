@@ -86,7 +86,6 @@ div#polygon-results-div {
 #search-box {
     font-size: 20px;
     padding: 7px;
-    margin: 7px;
     border-radius: 7px;
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;
@@ -111,7 +110,7 @@ ul.add-form li {
     list-style-type: none;
     float: left;
 }
-ul.add-form li input {
+input {
     font-size: 20px;
     border-radius: 7px;
     -webkit-border-radius: 7px;
@@ -135,6 +134,8 @@ div#expl-div {
 div.polygon-but {
     color: #3B240B;
     border-radius: 0px 0px 7px 7px;
+    -webkit-border-radius: 0px 0px 7px 7px;
+    -moz-border-radius: 0px 0px 7px 7px;
     padding: 5px;
     float: left;
     width: 120px;
@@ -165,4 +166,10 @@ div.polygon-but {
 }
 #polygon-clear.depressed {
     background-color: #FFF;
+}
+
+h2 {
+    color: #191007;
+    letter-spacing: 2px;
+    font-weight: normal;
 }

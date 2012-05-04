@@ -55,6 +55,20 @@ function polygonModeToggle() {
     }
 }
 
+function searchLocationListener(url) {
+    $('#search-loc-form').submit(function(e) {
+        var params="?location="+$("#search-location").val();
+        e.preventDefault();
+        $.getJSON(url+params, $('#search-loc-form').serialize(),
+            function(data) {
+                var latlng = new google.maps.LatLng(data['lat'], data['lon']);
+                map.panTo(latlng);
+                map.setZoom(8);
+            });
+        return false;
+    });
+}
+
 function polygonModeOff() {
         pline.setPath([]);
         polyMarker.setMap(null);
@@ -148,7 +162,7 @@ function resizeGmap() {
     /* Checks if the results div exists, and resizes the map if it does. 
      * Triggered when polyResults are found or the window is resized.
      */
-    var resW = 200;
+    var resW = 220;
     if (!polyResults) resW=0;
     var wrapW = $("#wrapper").width();
     $("#gmap").css("width",wrapW - resW);

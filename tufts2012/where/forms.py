@@ -14,3 +14,4 @@ class LocationForm(UtilModelForm):
             help_text="First Name")
     last_name = forms.CharField(max_length=30, required=True,
             help_text="Last Name")
+
