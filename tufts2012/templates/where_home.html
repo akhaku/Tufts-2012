@@ -12,6 +12,10 @@
 </div>
 <div class="clearfix"></div>
 <div id="gmap"></div>
+<div id="polygon-tools">
+    <div id="polygon-on" class="polygon-but">Activate Polygon</div>
+    <div id="polygon-clear" class="polygon-but depressed">Clear Polygons</div>
+</div>
 <div id="polygon-results-div">
     <ul id="polygon-results"></ul>
 </div>
@@ -39,6 +43,7 @@
                 });
             polygonListeners('{% url where.views.find_area %}', map);
             autocompleteInit('{% url where.views.search_ajax %}', map);
+            polygonButtonListeners();
             });
 </script>
 {% endblock %}

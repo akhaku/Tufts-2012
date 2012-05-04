@@ -112,3 +112,35 @@ div#expl-div {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+div#polygon-tools {
+
+}
+div.polygon-but {
+    border-radius: 0px 0px 7px 7px;
+    padding: 5px;
+    float: left;
+    width: 120px;
+    text-align: center;
+    margin-right: 5px;
+    margin-left: 5px;
+    border: 2px outset #3A2F0B;
+    border-top: none;
+    cursor: pointer;
+    position: relative;
+    top: -1px;
+    left: -1px;
+    box-shadow: 3px 3px 5px #888;
+    webkit-box-shadow: 3px 3px 5px #888;
+    -moz-webkit-box-shadow: 3px 3px 5px #888;
+}
+.polygon-but.depressed {
+    border: 2px inset #3A2F0B;
+    position: relative;
+    border-top: none;
+    top: 1px;
+    left: 1px;
+    box-shadow: 0px 0px 0px #888;
+    webkit-box-shadow: 0px 0px 0px #888;
+    -moz-webkit-box-shadow: 0px 0px 0px #888;
+}

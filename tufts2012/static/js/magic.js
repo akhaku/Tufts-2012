@@ -1,6 +1,10 @@
 var pLine;
+var polygonArray = Array();
 var polygonMode;
+var polygonListen = false;
+var polyMarker;
 var infowin;
+var map;
 var plineOptions = {strokeColor:"#0B0B61",strokeOpacity:0.7};
 var pgonOptions = $.extend(plineOptions,{fillColor:"#0B0B61",fillOpacity:0.4});
 
@@ -12,10 +16,13 @@ function initialize() {
         zoom: 3,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    var map = new google.maps.Map(document.getElementById("gmap"),
+    map = new google.maps.Map(document.getElementById("gmap"),
             mapOptions);
     pline = new google.maps.Polyline(plineOptions);
     pline.setMap(map);
+    $('#polygon-clear').addClass('depressed');
+    polyMarker = new google.maps.Marker({ map:map,
+        title: "", icon: "static/img/pin.gif"});
     return map;
 }
 
@@ -28,6 +35,26 @@ function placeMarker(lat, lon, name, place, map) {
     google.maps.event.addListener(marker, 'click', function(r) {
         infowin.content = name + " - " + place;
         infowin.open(map, marker);
+    });
+}
+
+function polygonButtonListeners() {
+    $('#polygon-on').click(function() {
+        if (polygonListen) {
+            $(this).removeClass('depressed');
+            polygonListen = false;
+        } else {
+            $(this).addClass('depressed');
+            polygonListen = true;
+        }
+    });
+    $('#polygon-clear').click(function() {
+        pline.setPath([]);
+        polyMarker.setMap(null);
+        polygonMode = false;
+        for(var i=0; i<polygonArray.length; i++)
+            polygonArray[i].setMap(null);
+        $(this).addClass('depressed');
     });
 }
 
@@ -58,23 +85,26 @@ function addPolygonMember(person) {
 
 function polygonListeners(get_url, map) {
     google.maps.event.addListener(map, 'click', function(e) {
+        if (polygonListen == false)
+            return 
+        if ($('#polygon-clear').hasClass('depressed'))
+            $('#polygon-clear').removeClass('depressed');
         var path = pline.getPath();
         path.push(e.latLng);
         if(!polygonMode) {
-            var marker = new google.maps.Marker({position: e.latLng,
-                map:map, title: "", icon: "static/img/pin.gif"});
-            marker.setMap(map);
+            polyMarker.setPosition(e.latLng);
+            polyMarker.setMap(map);
             polygonMode = true;
-            google.maps.event.addListener(marker, 'click', function(ev) {
+            google.maps.event.addListener(polyMarker, 'click', function(ev) {
                 if(pline.getPath()['b'].length > 2) {
                     var paths = pline.getPath();
                     var pgon = new google.maps.Polygon(
                         $.extend({paths: paths}, pgonOptions));
+                    pline.setPath([]);
                     pgon.setMap(map);
-                    marker.setMap(null);
+                    polygonArray.push(pgon);
+                    polyMarker.setMap(null);
                     polygonMode = false;
-                    pline = new google.maps.Polyline(plineOptions);
-                    pline.setMap(map);
                     var params = ""
                     $.each(paths['b'], function (i, v) {
                         params += v.lat() + "," + v.lng() + ",,";
