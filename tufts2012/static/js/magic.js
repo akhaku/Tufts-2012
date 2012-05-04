@@ -54,6 +54,7 @@ function polygonButtonListeners() {
         pline.setPath([]);
         polyMarker.setMap(null);
         polyResults = false;
+        resizeGmap();
         polygonMode = false;
         for(var i=0; i<polygonArray.length; i++)
             polygonArray[i].setMap(null);
