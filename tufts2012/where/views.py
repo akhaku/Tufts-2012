@@ -19,6 +19,10 @@ def home(request):
     return render_to_response('where_home.html', {},
             context_instance=RequestContext(request))
 
+def about(request):
+    return render_to_response('about.html', {},
+            context_instance=RequestContext(request))
+
 def locations_json(request):
     locations = Location.objects.all().select_related('user');
     return render_to_response('locations_json.json',{'locations': locations},

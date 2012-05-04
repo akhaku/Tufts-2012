@@ -54,6 +54,7 @@ function polygonButtonListeners() {
         polygonMode = false;
         for(var i=0; i<polygonArray.length; i++)
             polygonArray[i].setMap(null);
+        $('#polygon-results').empty();
         $(this).addClass('depressed');
     });
 }
@@ -76,7 +77,7 @@ function locationFormListeners(post_url, map) {
 }
 
 function addPolygonMember(person) {
-    var res = $('#polygon-results-div');
+    var res = $('#polygon-results');
     if (!$('#poly-'+person['id'], res).get(0)) {
         res.append("<li id='poly-"+person['id']+"'>"+
                 person['name']+" - "+person['loc']);

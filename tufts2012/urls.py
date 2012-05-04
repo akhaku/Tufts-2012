@@ -8,6 +8,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
         url(r'^$', 'where.views.home'),
         url(r'^json/$', 'where.views.locations_json'),
+        url(r'^about/$', 'where.views.about'),
         url(r'^where/new/$', 'where.views.location_form'),
         url(r'^where/create/$', 'where.views.add_location'),
         url(r'^where/filter/$', 'where.views.search_ajax'),

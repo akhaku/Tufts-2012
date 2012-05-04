@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Tufts 2012</title>
+        <title>Where is Tufts 2012?</title>
         <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/style.css"/>
         <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/ui-lightness/jquery-ui-1.8.18.css" />
         {% block extrastyle %}
@@ -16,7 +16,7 @@
              ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
              })();
-</script>
+         </script>
      </head>
      <body>
          <div id="wrapper">
@@ -27,11 +27,14 @@
              {{ body }}
              {% endblock body %}
              <br/>
-             <div class="clearfix"></div>
+             <br/>
              <div id="footer">
-                 Designed and developer by Ammar Khaku, Tufts EN 12. Contact?
-                 <a href="http://akhaku.com">akhaku.com</a>
+                 Designed and developed by Ammar Khaku, Tufts EN 12. Contact?
+                 <a href="http://akhaku.com" target="_blank">akhaku.com</a>.
+                 Hosted on <a href="http://heroku.com" target="_blank">Heroku</a>
              </div>
+             <br/>
+             <div class="clearfix"></div>
          </div>
          <script type="text/javascript" src="{{MEDIA_URL}}js/jquery-1.7.2.min.js">
          </script>
