@@ -134,10 +134,11 @@ function resizeGmap() {
     /* Checks if the results div exists, and resizes the map if it does. 
      * Triggered when polyResults are found or the window is resized.
      */
-    if (!polyResults) return;
-    var wrapW = $("#wrapper").width();
     var resW = 180;
+    if (!polyResults) resW=0;
+    var wrapW = $("#wrapper").width();
     $("#gmap").css("width",wrapW - resW);
+    $("#polygon-tools").css("margin-left", resW);
     google.maps.event.trigger(map, 'resize');
 }
 
