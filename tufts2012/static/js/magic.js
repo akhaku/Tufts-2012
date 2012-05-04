@@ -41,16 +41,21 @@ function placeMarker(lat, lon, name, place, map) {
 }
 
 function polygonButtonListeners() {
-    $('#polygon-on').click(function() {
-        if (polygonListen) {
-            $(this).removeClass('depressed');
-            polygonListen = false;
-        } else {
-            $(this).addClass('depressed');
-            polygonListen = true;
-        }
-    });
-    $('#polygon-clear').click(function() {
+    $('#polygon-on').click(polygonModeToggle);
+    $('#polygon-clear').click(polygonModeOff);
+}
+
+function polygonModeToggle() {
+    if (polygonListen) {
+        $('#polygon-on').removeClass('depressed');
+        polygonListen = false;
+    } else {
+        $("#polygon-on").addClass('depressed');
+        polygonListen = true;
+    }
+}
+
+function polygonModeOff() {
         pline.setPath([]);
         polyMarker.setMap(null);
         polyResults = false;
@@ -60,8 +65,8 @@ function polygonButtonListeners() {
         for(var i=0; i<polygonArray.length; i++)
             polygonArray[i].setMap(null);
         $('#polygon-results').empty();
-        $(this).addClass('depressed');
-    });
+        $('#polygon-clear').addClass('depressed');
+        polygonModeToggle();
 }
 
 function locationFormListeners(post_url, map) {
@@ -85,7 +90,7 @@ function addPolygonMember(person) {
     var res = $('#polygon-results');
     if (!$('#poly-'+person['id'], res).get(0)) {
         res.append("<li id='poly-"+person['id']+"'>"+
-                person['name']+" - "+person['loc']);
+                "<span class='bold'>"+person['name']+"</span> - "+person['loc']);
     }
 }
 
@@ -136,14 +141,14 @@ function destroySlimscroll() {
     $("#polygon-results").css("height","auto");
 }
 function slimScrollSetup() {
-    $("#polygon-results").slimScroll({height:"350px"});
+    $("#polygon-results").slimScroll({height:"350px",alwaysVisible: true});
 }
 
 function resizeGmap() {
     /* Checks if the results div exists, and resizes the map if it does. 
      * Triggered when polyResults are found or the window is resized.
      */
-    var resW = 180;
+    var resW = 200;
     if (!polyResults) resW=0;
     var wrapW = $("#wrapper").width();
     $("#gmap").css("width",wrapW - resW);

@@ -59,6 +59,10 @@ a:hover {
     text-decoration: underline;
 }
 
+.bold {
+    font-weight: bold;
+}
+
 div#gmap {
     max-width: 100%;
     float: left;
@@ -67,14 +71,13 @@ div#gmap {
 }
 #polygon-results {
     max-height: 350px;
-    overflow: hidden;
     padding: 0px;
     font-size: 12px;
 }
 div#polygon-results-div {
     max-height: 350px;
     float: left;
-    width: 180px;
+    width: 200px;
 }
 #polygon-results li {
     list-style-type: none;
@@ -127,7 +130,6 @@ div#expl-div {
     font-size: 15px;
     margin-left: 90px;;
     margin-top: 20px;
-    margin-bottom: 20px;
 }
 
 div.polygon-but {
@@ -151,6 +153,7 @@ div.polygon-but {
 }
 .polygon-but.depressed {
     color: #2E2E2E;
+    background-color: #F3E2A9;
     border: 2px inset #3A2F0B;
     position: relative;
     border-top: none;
@@ -159,4 +162,7 @@ div.polygon-but {
     box-shadow: 0px 0px 0px #888;
     webkit-box-shadow: 0px 0px 0px #888;
     -moz-webkit-box-shadow: 0px 0px 0px #888;
+}
+#polygon-clear.depressed {
+    background-color: #FFF;
 }

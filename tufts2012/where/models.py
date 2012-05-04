@@ -7,7 +7,7 @@ class Location(models.Model):
     lat = models.DecimalField(max_digits=6, decimal_places=3)
     lon = models.DecimalField(max_digits=6, decimal_places=3)
      # The english name for the location
-    name = models.CharField(max_length=50, help_text="Location")
+    name = models.CharField(max_length=50, help_text="Location (City, State)")
     user = models.ForeignKey(User, related_name="location")
 
     def __unicode__(self):

@@ -10,7 +10,7 @@ class LocationForm(UtilModelForm):
         model = Location
         fields = ('name',)
 
-    first_name = forms.CharField(max_length=20, required=True,
+    first_name = forms.CharField(max_length=30, required=True,
             help_text="First Name")
     last_name = forms.CharField(max_length=30, required=True,
             help_text="Last Name")

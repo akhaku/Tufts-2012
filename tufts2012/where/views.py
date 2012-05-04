@@ -39,6 +39,8 @@ def add_location(request):
     fname = request.REQUEST.get('first_name').title()
     lname = request.REQUEST.get('last_name').title()
     uname = "%s%s" % (fname.lower(), lname.lower())
+    if len(uname) > 30:
+        uname = uname[0:30]
     geocode_url = "%s?address=%s&sensor=false" % (settings.GEOCODING_URL, quote(address))
     json_data = str(urlopen(geocode_url).read())
     obj = json.loads(json_data) # TODO catch IndexError, KeyError parse error etc
