@@ -21,8 +21,6 @@ def home(request):
             context_instance=RequestContext(request))
 
 def about(request):
-    if not settings.DEBUG:
-        send_mail('Mail subject', 'message here', 'ammar.khaku@gmail.com', ['ammar.khaku@gmail.com',])
     return render_to_response('about.html', {},
             context_instance=RequestContext(request))
 
@@ -65,7 +63,6 @@ def add_location(request):
         uname = uname[0:30]
     geocode_url = "%s?address=%s&sensor=false" % (settings.GEOCODING_URL, quote(address))
     json_data = str(urlopen(geocode_url).read())
-    logging.error(geocode_url)
     obj = json.loads(json_data)
     try:
         lat = obj['results'][0]['geometry']['location']['lat']
@@ -81,11 +78,20 @@ def add_location(request):
         user = User.objects.get(username=uname)
     except User.DoesNotExist:
         user = User.objects.create(first_name=fname, last_name=lname, username=uname)
+        if not settings.DEBUG:
+            send_mail("[TUFTS2012] Created user %s" % uname,
+                    "User %s was created." % user.get_full_name(), "root@tufts2012.com",
+                    settings.ADMINS[0][1], True)
     try:
         location = user.location.get()
         location.lat = lat
         location.lon = lon
         location.user = user
+        if not settings.DEBUG:
+            send_mail("[TUFTS2012] Updated user %s" % uname,
+                    "User %s moved from %s to %s." % (user.get_full_name(),
+                        location.name,address), "root@tufts2012.com",
+                    settings.ADMINS[0][1], True)
         location.name = address
         location.save()
     except Location.DoesNotExist:
