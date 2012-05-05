@@ -10,9 +10,11 @@ ADMINS = (
 
 SEND_BROKEN_LINK_EMAILS = True
 EMAIL_HOST = "smtp.sendgrid.net"
-if not DEBUG:
+try:
     EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
     EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
+except KeyError:
+    pass
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 MANAGERS = ADMINS
