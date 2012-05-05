@@ -5,8 +5,12 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-        ('Ammar Khaku', 'ammar.khaku@gmail.com'),
+        ('Ammar Khaku', 'dummy@gmail.com'),
 )
+try:
+    ADMINS[0][1] = os.environ['ADMIN_EMAIL_ADDRESS']
+except KeyError:
+    pass
 
 SEND_BROKEN_LINK_EMAILS = True
 EMAIL_HOST = "smtp.sendgrid.net"
