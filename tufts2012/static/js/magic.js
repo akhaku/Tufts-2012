@@ -79,7 +79,10 @@ function polygonModeOff() {
             polygonArray[i].setMap(null);
         $('#polygon-results').empty();
         $('#polygon-clear').removeClass('depressed');
-        polygonModeToggle();
+        if (polygonListen) {
+            $('#polygon-on').removeClass('depressed');
+            polygonListen = false;
+        }
 }
 
 function locationFormListeners(post_url, map) {
