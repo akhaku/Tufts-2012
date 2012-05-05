@@ -84,6 +84,8 @@ function polygonModeOff() {
 
 function locationFormListeners(post_url, map) {
     $('#location-form').submit(function(e) {
+        $('#where-submit').attr('disabled','disabled');
+        $('#where-submit').css('color','#6E6E6E');
         e.preventDefault();
         $.post(post_url, $('form#location-form').serialize(),
             function(data) {
