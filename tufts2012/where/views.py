@@ -15,6 +15,7 @@ from where.models import Location
 from util import in_polygon
 from random import random
 import logging
+from django.views.decorators.csrf import csrf_exempt # FIXME
 
 def home(request):
     return render_to_response('where_home.html', {},
@@ -49,6 +50,7 @@ def location_form(request):
             {'form': form, 'added': False},
             context_instance=RequestContext(request))
 
+@csrf_exempt # FIXME
 def add_location(request):
     form = LocationForm(data=request.POST)
     if not form.is_valid():
