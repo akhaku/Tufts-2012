@@ -139,6 +139,8 @@ div#expl-div {
     margin-top: 20px;
 }
 
+.ui-autocomplete { max-height: 100px; }
+
 div.polygon-but {
     color: #3B240B;
     border-radius: 7px 7px 0px 0px;

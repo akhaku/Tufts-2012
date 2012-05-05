@@ -176,15 +176,12 @@ function resizeGmap() {
 }
 
 function autocompleteInit(get_url, map) {
+
     $('#search-box').autocomplete({
         autoFocus: true,
         delay: 400,
         source: get_url,
         minLength: 3,
-        focus: function(e, v) {
-            $('#search-box').val(v.item.label);
-            return false;
-        },
         select: function(e,i) {
             var latlng = new google.maps.LatLng(i.item.lat, i.item.lon);
             map.panTo(latlng);
@@ -195,5 +192,18 @@ function autocompleteInit(get_url, map) {
             infowin.open(map);
             return false;
         }
+    });
+
+    /* Magic to detect no results found */
+    var __response = $.ui.autocomplete.prototype._response;
+    $.ui.autocomplete.prototype._response = function(content) {
+        __response.apply(this, [content]);
+        this.element.trigger("autocompletesearchcomplete", [content]);
+    };
+    $("#search-box").bind("autocompletesearchcomplete", function(event, contents) {
+        if (contents.length == 0)
+            $("#no-results").html("No results found");
+        else
+            $("#no-results").empty();
     });
 }

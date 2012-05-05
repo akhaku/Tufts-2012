@@ -1,13 +1,19 @@
 # Django settings for tufts2012 project.
 import os
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+        ('Ammar Khaku', 'ammar.khaku@gmail.com'),
 )
 
+SEND_BROKEN_LINK_EMAILS = True
+EMAIL_HOST = "smtp.sendgrid.net"
+# EMAIL_HOST_USER = pass
+# EMAIL_HOST_PASSWORD = pass
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 MANAGERS = ADMINS
 
 DATABASES = {

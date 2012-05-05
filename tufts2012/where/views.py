@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.core.mail import send_mail
 from django.utils.html import escape
 import json
 from urllib import quote, unquote
@@ -16,6 +17,8 @@ from random import random
 import logging
 
 def home(request):
+    if not settings.DEBUG:
+        send_mail('Mail subject', 'message here', 'ammar.khaku@gmail.com', ['ammar.khaku@gmail.com',])
     return render_to_response('where_home.html', {},
             context_instance=RequestContext(request))
 
