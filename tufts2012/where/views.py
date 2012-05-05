@@ -29,9 +29,12 @@ def search_loc_ajax(request):
     address = address.rstrip().lstrip()
     geocode_url = "%s?address=%s&sensor=false" % (settings.GEOCODING_URL, quote(address))
     json_data = str(urlopen(geocode_url).read())
-    obj = json.loads(json_data) # TODO catch IndexError, KeyError parse error etc
-    lat = obj['results'][0]['geometry']['location']['lat']
-    lon = obj['results'][0]['geometry']['location']['lng']
+    obj = json.loads(json_data)
+    try:
+        lat = obj['results'][0]['geometry']['location']['lat']
+        lon = obj['results'][0]['geometry']['location']['lng']
+    except IndexError, KeyError:
+        return HttpResponse("")
     return HttpResponse(json.dumps(dict(lat=float(lat),lon=float(lon))))
 
 def locations_json(request):
@@ -60,9 +63,14 @@ def add_location(request):
     geocode_url = "%s?address=%s&sensor=false" % (settings.GEOCODING_URL, quote(address))
     json_data = str(urlopen(geocode_url).read())
     logging.error(geocode_url)
-    obj = json.loads(json_data) # TODO catch IndexError, KeyError parse error etc
-    lat = obj['results'][0]['geometry']['location']['lat']
-    lon = obj['results'][0]['geometry']['location']['lng']
+    obj = json.loads(json_data)
+    try:
+        lat = obj['results'][0]['geometry']['location']['lat']
+        lon = obj['results'][0]['geometry']['location']['lng']
+    except IndexError, KeyError:
+        return render_to_response('snippets/location_form.html',
+                {'form': form, 'added': False},
+                context_instance=RequestContext(request))
     # Randomize location so markers dont overlap
     lat = lat + 0.4 * random() - 0.2 
     lon = lon + 0.4 * random() - 0.2

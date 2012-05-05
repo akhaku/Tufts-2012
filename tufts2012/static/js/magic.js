@@ -62,7 +62,7 @@ function searchLocationListener(url) {
             function(data) {
                 var latlng = new google.maps.LatLng(data['lat'], data['lon']);
                 map.panTo(latlng);
-                map.setZoom(8);
+                map.setZoom(7);
             });
         return false;
     });
