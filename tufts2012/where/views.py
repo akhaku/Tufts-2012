@@ -23,6 +23,14 @@ def home(request):
 def about(request):
     return render_to_response('about.html', {},
             context_instance=RequestContext(request))
+    
+def server_error(request):
+    return render_to_response('500.html', {},
+            context_instance=RequestContext(request))
+
+def page_not_found(request):
+    return render_to_response('404.html', {},
+            context_instance=RequestContext(request))
 
 def search_loc_ajax(request):
     address=request.REQUEST.get("location");

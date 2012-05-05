@@ -19,3 +19,6 @@ urlpatterns = patterns('',
             {'document_root': MEDIA_ROOT}),
       url(r'^admin/', include(admin.site.urls)),
 )
+
+handler404 = 'where.views.page_not_found'
+handler500 = 'where.views.server_error'
