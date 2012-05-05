@@ -59,6 +59,7 @@ def add_location(request):
         uname = uname[0:30]
     geocode_url = "%s?address=%s&sensor=false" % (settings.GEOCODING_URL, quote(address))
     json_data = str(urlopen(geocode_url).read())
+    logging.error(geocode_url)
     obj = json.loads(json_data) # TODO catch IndexError, KeyError parse error etc
     lat = obj['results'][0]['geometry']['location']['lat']
     lon = obj['results'][0]['geometry']['location']['lng']
