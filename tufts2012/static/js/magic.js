@@ -191,7 +191,11 @@ function autocompleteInit(get_url, map) {
             infowin.setPosition(latlng);
             infowin.open(map);
             return false;
-        }
+        },
+        focus: function(e, v) {
+                    $('#search-box').val(v.item.label);
+                    return false;
+                }
     });
 
     /* Magic to detect no results found */
