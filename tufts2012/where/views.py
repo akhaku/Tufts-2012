@@ -15,7 +15,6 @@ from where.models import Location
 from util import in_polygon
 from random import random
 import logging
-from django.views.decorators.csrf import csrf_exempt
 
 def home(request):
     return render_to_response('where_home.html', {},
@@ -58,7 +57,6 @@ def location_form(request):
             {'form': form, 'added': False},
             context_instance=RequestContext(request))
 
-@csrf_exempt
 def add_location(request):
     form = LocationForm(data=request.POST)
     if not form.is_valid():
@@ -88,20 +86,20 @@ def add_location(request):
         user = User.objects.get(username=uname)
     except User.DoesNotExist:
         user = User.objects.create(first_name=fname, last_name=lname, username=uname)
-#         if not settings.DEBUG: FIXME
-#              send_mail("[TUFTS2012] Created user %s" % uname, 
-#                     "User %s was created." % user.get_full_name(), "root@tufts2012.com",
-#                     [settings.ADMINS[0][1]], True)
+        if not settings.DEBUG:
+             send_mail("[TUFTS2012] Created user %s" % uname, 
+                    "User %s was created." % user.get_full_name(), "root@tufts2012.com",
+                    [settings.ADMINS[0][1]], True)
     try:
         location = user.location.get()
         location.lat = lat
         location.lon = lon
         location.user = user
-#         if not settings.DEBUG:
-#              send_mail("[TUFTS2012] Updated user %s" % uname,
-#                     "User %s moved from %s to %s." % (user.get_full_name(),
-#                         location.name,address), "root@tufts2012.com",
-#                     [settings.ADMINS[0][1]], True)
+        if not settings.DEBUG:
+             send_mail("[TUFTS2012] Updated user %s" % uname,
+                    "User %s moved from %s to %s." % (user.get_full_name(),
+                        location.name,address), "root@tufts2012.com",
+                    [settings.ADMINS[0][1]], True)
         location.name = address
         location.save()
     except Location.DoesNotExist:
