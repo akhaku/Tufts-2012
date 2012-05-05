@@ -80,8 +80,8 @@ def add_location(request):
                 {'form': form, 'added': False},
                 context_instance=RequestContext(request))
     # Randomize location so markers dont overlap
-    lat = lat + 0.4 * random() - 0.2 
-    lon = lon + 0.4 * random() - 0.2
+    lat = lat + 0.2 * random() - 0.1 
+    lon = lon + 0.2 * random() - 0.1
     try:
         user = User.objects.get(username=uname)
     except User.DoesNotExist:
