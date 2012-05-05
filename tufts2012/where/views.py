@@ -81,7 +81,7 @@ def add_location(request):
         if not settings.DEBUG:
             send_mail("[TUFTS2012] Created user %s" % uname,
                     "User %s was created." % user.get_full_name(), "root@tufts2012.com",
-                    settings.ADMINS[0][1], True)
+                    [settings.ADMINS[0][1]], True)
     try:
         location = user.location.get()
         location.lat = lat
@@ -91,7 +91,7 @@ def add_location(request):
             send_mail("[TUFTS2012] Updated user %s" % uname,
                     "User %s moved from %s to %s." % (user.get_full_name(),
                         location.name,address), "root@tufts2012.com",
-                    settings.ADMINS[0][1], True)
+                    [settings.ADMINS[0][1]], True)
         location.name = address
         location.save()
     except Location.DoesNotExist:
