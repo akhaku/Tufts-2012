@@ -17,12 +17,12 @@ from random import random
 import logging
 
 def home(request):
-    if not settings.DEBUG:
-        send_mail('Mail subject', 'message here', 'ammar.khaku@gmail.com', ['ammar.khaku@gmail.com',])
     return render_to_response('where_home.html', {},
             context_instance=RequestContext(request))
 
 def about(request):
+    if not settings.DEBUG:
+        send_mail('Mail subject', 'message here', 'ammar.khaku@gmail.com', ['ammar.khaku@gmail.com',])
     return render_to_response('about.html', {},
             context_instance=RequestContext(request))
 
