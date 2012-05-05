@@ -177,6 +177,8 @@ function resizeGmap() {
 
 function autocompleteInit(get_url, map) {
     $('#search-box').autocomplete({
+        autoFocus: true,
+        delay: 0,
         source: get_url,
         minLength: 3,
         focus: function(e, v) {

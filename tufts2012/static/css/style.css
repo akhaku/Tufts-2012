@@ -92,8 +92,15 @@ div#polygon-results-div {
 }
 
 div#search-div {
-    width: 200px;
+    width: 250px;
     float: left;
+}
+
+#search-loc-form input[type='text'] {
+    width: 150px;
+}
+#search-loc-form input[type='submit'] {
+    font-size: 15px;
 }
 
 div.clearfix {
