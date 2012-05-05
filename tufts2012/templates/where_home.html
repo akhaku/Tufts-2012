@@ -2,9 +2,12 @@
 {% block body %}
 <div id="search-div">
     <br/>
-    <input type="text" id="search-box" placeholder="Search name"/>
-    <p style="padding:0px;margin:0px;text-align:center">Or search by</p>
+    <span>Search by name:</span>
+    <input type="text" id="search-box" placeholder="Enter name"/>
+    <br/>
+    <br/>
     <form action="" method="get" id="search-loc-form">
+        <span>Search by location:</span>
         <input type="text" id="search-location" placeholder="Search location"/>
         <input type="submit" name="location" id="search-loc-but" value="Search"/>
     </form>

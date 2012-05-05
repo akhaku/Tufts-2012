@@ -39,6 +39,7 @@ ul.errorlist li { float: left; font-size: 12px; color: #8A0808; }
 
 div#wrapper {
     min-width: 890px;
+    color: #3B240B;
     width: 80%;
     background-color: #FFF;
     margin-left: auto;
@@ -97,7 +98,7 @@ div#search-div {
 }
 
 #search-loc-form input[type='text'] {
-    width: 150px;
+    width: 160px;
 }
 #search-loc-form input[type='submit'] {
     font-size: 15px;
@@ -134,7 +135,7 @@ div#expl-div {
     color: #3B240B;
     float: left;
     font-size: 15px;
-    margin-left: 90px;;
+    margin-left: 40px;;
     margin-top: 20px;
 }
 
