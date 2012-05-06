@@ -103,9 +103,11 @@ div#gmap {
 #polygon-results {
     max-height: 350px;
     padding: 0px;
+    margin: 0px;
     font-size: 12px;
 }
 div#polygon-results-div {
+    height: 0px;
     max-height: 350px;
     float: left;
     width: 200px;
