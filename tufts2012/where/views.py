@@ -63,7 +63,6 @@ def add_location(request):
     email_from = "root@tufts2012.com"
     email_to = [settings.ADMINS[0][1]]
     email_ip = request.META['REMOTE_ADDR']
-    updated = ""
     form = LocationForm(data=request.POST)
     if not form.is_valid():
         return render_to_response('snippets/location_form.html',
@@ -104,7 +103,6 @@ def add_location(request):
         email_subject += "Updated user %s" % uname
         email_body = "User %s moved from %s to %s by ip %s." % (user.get_full_name(),
             location.name, address, email_ip)
-        updated = "updated"
         location.name = address
         location.save()
     except Location.DoesNotExist:
@@ -114,8 +112,8 @@ def add_location(request):
     if not settings.DEBUG:
         send_mail(email_subject, email_body, email_from, email_to, True)
     return render_to_response('snippets/location_form.html',
-            {'form': form, 'added': True, 'lat': lat, 'lon': lon,
-                'name': name, 'location': address, 'updated': updated},
+            {'form' :form, 'added': True, 'lat': lat, 'lon': lon,
+                'name' :name, 'location' :address},
             context_instance=RequestContext(request))
 
 def find_area(request, coords):

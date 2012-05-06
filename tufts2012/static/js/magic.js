@@ -98,11 +98,6 @@ function locationFormListeners(post_url, map) {
                     var lon = $('#added-lon',data).html();
                     var name = $('#added-name',data).html();
                     var loc = $('#added-loc',data).html();
-                    var updated = $('#added-updated',data).html();
-                    if (updated) { var flashStr = "Updated "; 
-                    } else { var flashStr = "Added "; }
-                    flashStr += name + " to " + loc;
-                    showFlash(flashStr);
                     placeMarker(lat, lon, name, loc, map);
                     $("#added-div").remove();
                 }
@@ -202,7 +197,7 @@ function autocompleteInit(get_url, map) {
         focus: function(e, v) {
                     $('#search-box').val(v.item.label);
                     return false;
-                },
+                }
     });
 
     /* Magic to detect no results found */
@@ -224,12 +219,4 @@ function hideLoading() {
 }
 function showLoading() {
     $('#overlay').show();
-}
-function showFlash(text) {
-    $('#flash').text(text);
-    $('#flash').slideDown('fast', function() {
-        setTimeout(function() {
-            $('#flash').slideUp('fast');    
-        }, 3000);
-    })
 }
