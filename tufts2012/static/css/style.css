@@ -106,7 +106,6 @@ div#gmap {
     font-size: 12px;
 }
 div#polygon-results-div {
-    height: 0px;
     max-height: 350px;
     float: left;
     width: 200px;
@@ -187,8 +186,8 @@ div.polygon-but {
     border-bottom: none;
     cursor: pointer;
     position: relative;
-    top: -1px;
-    left: -1px;
+    top: 1px;
+    left: 1px;
     box-shadow: 0px 0px 0px #888;
     webkit-box-shadow: 0px 0px 0px #888;
     -moz-webkit-box-shadow: 0px 0px 0px #888;
@@ -198,8 +197,8 @@ div.polygon-but {
     background-color: #F3E2A9;
     border-style: inset;
     position: relative;
-    top: 1px;
-    left: 1px;
+    top: -1px;
+    left: -1px;
     box-shadow: -3px -3px 5px #888;
     webkit-box-shadow: -3px -3px 5px #888;
     -moz-webkit-box-shadow: -3px -3px 5px #888;
