@@ -23,6 +23,7 @@ except KeyError:
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 MANAGERS = ADMINS
+LAT_LONG_RANDOMIZER = 0.02
 
 DATABASES = {
     'default': {

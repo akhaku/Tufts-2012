@@ -15,6 +15,7 @@ from where.models import Location
 from util import in_polygon
 from random import random
 import logging
+from django.views.decorators.csrf import csrf_exempt
 
 def home(request):
     return render_to_response('where_home.html', {},
@@ -50,7 +51,8 @@ def locations_json(request):
     locations = Location.objects.all().select_related('user');
     return render_to_response('locations_json.json',{'locations': locations},
             context_instance=RequestContext(request))
- 
+
+@csrf_exempt
 def location_form(request):
     form = LocationForm
     return render_to_response('snippets/location_form.html',
@@ -80,26 +82,27 @@ def add_location(request):
                 {'form': form, 'added': False},
                 context_instance=RequestContext(request))
     # Randomize location so markers dont overlap
-    lat = lat + 0.1 * random() - 0.05 
-    lon = lon + 0.1 * random() - 0.05
+    randomizer = settings.LAT_LONG_RANDOMIZER
+    lat = lat + randomizer * random() - randomizer/2
+    lon = lon + randomizer * random() - randomizer/2
     try:
         user = User.objects.get(username=uname)
     except User.DoesNotExist:
         user = User.objects.create(first_name=fname, last_name=lname, username=uname)
-        if not settings.DEBUG:
-             send_mail("[TUFTS2012] Created user %s" % uname, 
-                    "User %s was created." % user.get_full_name(), "root@tufts2012.com",
-                    [settings.ADMINS[0][1]], True)
+#         if not settings.DEBUG:
+#              send_mail("[TUFTS2012] Created user %s" % uname, 
+#                     "User %s was created." % user.get_full_name(), "root@tufts2012.com",
+#                     [settings.ADMINS[0][1]], True)
     try:
         location = user.location.get()
         location.lat = lat
         location.lon = lon
         location.user = user
-        if not settings.DEBUG:
-             send_mail("[TUFTS2012] Updated user %s" % uname,
-                    "User %s moved from %s to %s." % (user.get_full_name(),
-                        location.name,address), "root@tufts2012.com",
-                    [settings.ADMINS[0][1]], True)
+#         if not settings.DEBUG:
+#              send_mail("[TUFTS2012] Updated user %s" % uname,
+#                     "User %s moved from %s to %s." % (user.get_full_name(),
+#                         location.name,address), "root@tufts2012.com",
+#                     [settings.ADMINS[0][1]], True)
         location.name = address
         location.save()
     except Location.DoesNotExist:
