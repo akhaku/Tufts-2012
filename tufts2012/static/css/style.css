@@ -41,15 +41,17 @@ div#flash {
     position: fixed;
     z-index: 5;
     top: 0px;
+    right: 50px;
     font-size: 20px;
     letter-spacing: 2px;
-    left: 0px;
     background-color: #FFF;
     opacity: 0.8;
     filter:alpha(opacity=80);
     border: 2px solid #61380B;
     padding: 10px;
-    border-radius: 0px 0px 7px 0px;
+    border-radius: 0px 0px 7px 7px;
+    webkit-border-radius: 0px 0px 7px 7px;
+    moz-border-radius: 0px 0px 7px 7px;
     display: none;
 }
 
