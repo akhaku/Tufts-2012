@@ -68,9 +68,9 @@ def add_location(request):
         return render_to_response('snippets/location_form.html',
                 {'form': form, 'added': False},
                 context_instance=RequestContext(request))
-    address = request.REQUEST.get('name')
-    fname = request.REQUEST.get('first_name').title()
-    lname = request.REQUEST.get('last_name').title()
+    address = form.cleaned_data.get('name')
+    fname = form.cleaned_data.get('first_name').rstrip().lstrip().title()
+    lname = form.cleaned_data.get('last_name').rstrip().lstrip().title()
     uname = "%s%s" % (fname.lower(), lname.lower())
     if len(uname) > 30:
         uname = uname[0:30]
