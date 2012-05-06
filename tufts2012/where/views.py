@@ -52,13 +52,13 @@ def locations_json(request):
     return render_to_response('locations_json.json',{'locations': locations},
             context_instance=RequestContext(request))
 
-@csrf_exempt
 def location_form(request):
     form = LocationForm
     return render_to_response('snippets/location_form.html',
             {'form': form, 'added': False},
             context_instance=RequestContext(request))
 
+@csrf_exempt
 def add_location(request):
     form = LocationForm(data=request.POST)
     if not form.is_valid():
