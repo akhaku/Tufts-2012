@@ -58,6 +58,11 @@ def location_form(request):
             context_instance=RequestContext(request))
 
 def add_location(request):
+    email_subject = "[TUFTS2012] "
+    email_body = ""
+    email_from = "root@tufts2012.com"
+    email_to = [settings.ADMINS[0][1]]
+    email_ip = request.META['REMOTE_ADDR']
     form = LocationForm(data=request.POST)
     if not form.is_valid():
         return render_to_response('snippets/location_form.html',
@@ -87,26 +92,25 @@ def add_location(request):
         user = User.objects.get(username=uname)
     except User.DoesNotExist:
         user = User.objects.create(first_name=fname, last_name=lname, username=uname)
-        if not settings.DEBUG:
-             send_mail("[TUFTS2012] Created user %s" % uname, 
-                    "User %s was created." % user.get_full_name(), "root@tufts2012.com",
-                    [settings.ADMINS[0][1]], True)
+        email_subject += "Created user %s" % uname
+        email_body = "User %s was created by ip %s at location %s" % \
+                (user.get_full_name(), email_ip, address)
     try:
         location = user.location.get()
         location.lat = lat
         location.lon = lon
         location.user = user
-        if not settings.DEBUG:
-             send_mail("[TUFTS2012] Updated user %s" % uname,
-                    "User %s moved from %s to %s." % (user.get_full_name(),
-                        location.name,address), "root@tufts2012.com",
-                    [settings.ADMINS[0][1]], True)
+        email_subject += "Updated user %s" % uname
+        email_body = "User %s moved from %s to %s by ip %s." % (user.get_full_name(),
+            location.name, address, email_ip)
         location.name = address
         location.save()
     except Location.DoesNotExist:
         location = Location.objects.create(lat=lat, lon=lon, user=user, name=address)
     name = user.get_full_name()
     form = LocationForm()
+    if not settings.DEBUG:
+        send_mail(email_subject, email_body, email_from, email_to, True)
     return render_to_response('snippets/location_form.html',
             {'form' :form, 'added': True, 'lat': lat, 'lon': lon,
                 'name' :name, 'location' :address},
