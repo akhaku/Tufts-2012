@@ -128,6 +128,7 @@ function polygonListeners(get_url, map) {
             polygonMode = true;
             google.maps.event.addListener(polyMarker, 'click', function(ev) {
                 if(pline.getPath()['b'].length > 2) {
+                    showLoading();
                     var paths = pline.getPath();
                     var pgon = new google.maps.Polygon(
                         $.extend({paths: paths}, pgonOptions));
@@ -147,6 +148,7 @@ function polygonListeners(get_url, map) {
                                 polyResults = true;
                                 resizeGmap();
                             }
+                            hideLoading();
                             addPolygonMember(person);
                             slimScrollSetup();
                         });
@@ -210,4 +212,11 @@ function autocompleteInit(get_url, map) {
         else
             $("#no-results").empty();
     });
+}
+
+function hideLoading() {
+    $('#overlay').hide();
+}
+function showLoading() {
+    $('#overlay').show();
 }
