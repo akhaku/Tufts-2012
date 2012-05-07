@@ -24,6 +24,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 MANAGERS = ADMINS
 LAT_LONG_RANDOMIZER = 0.02
+BLOCKED_IPS = ['130.64.189.74',]
 
 DATABASES = {
     'default': {
@@ -114,6 +115,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'where.middleware.BlockedIpMiddleware',
 )
 
 ROOT_URLCONF = 'tufts2012.urls'
