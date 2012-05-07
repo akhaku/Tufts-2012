@@ -2,7 +2,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models import Q
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.core.mail import send_mail
@@ -118,7 +118,9 @@ def add_location(request):
                 'name': name, 'location': address, 'updated': updated},
             context_instance=RequestContext(request))
 
-def find_area(request, coords):
+def find_area(request, coords=None):
+    if not request.is_ajax() or coords is None:
+        return HttpResponseRedirect(reverse('where.views.home', args=[]))
     coords = coords.split(",,")
     users = User.objects.all().select_related('location')
     polygon_coords = [coord.split(',') for coord in coords]
@@ -139,6 +141,8 @@ def find_area(request, coords):
     return HttpResponse(json.dumps(selected_users))
 
 def search_ajax(request):
+    if not request.is_ajax():
+        return HttpResponseRedirect(reverse('where.views.home', args=[]))
     term = request.REQUEST.get('term').rstrip().lstrip().split()
     term1 = term[0]
     try:
