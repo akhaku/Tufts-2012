@@ -7,6 +7,10 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
         url(r'^$', 'where.views.home'),
+        url(r'^sitemap.xml$', 'django.views.generic.simple.direct_to_template',
+                {'template': 'sitemap.xml'}),
+        url(r'^robots.txt$', 'django.views.generic.simple.direct_to_template',
+                {'template': 'robots.txt'}),
         url(r'^json/$', 'where.views.locations_json'),
         url(r'^about/$', 'where.views.about'),
         url(r'^where/new/$', 'where.views.location_form'),
