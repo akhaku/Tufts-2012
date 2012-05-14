@@ -153,10 +153,10 @@ function polygonListeners(get_url, map) {
                                 polyResults = true;
                                 resizeGmap();
                             }
-                            hideLoading();
                             addPolygonMember(person);
                             slimScrollSetup();
                         });
+                        hideLoading();
                     });
                 }
             });
